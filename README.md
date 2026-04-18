@@ -1,4 +1,4 @@
-# OP.GG & U.GG Quick Access — Pengu Loader Plugin
+# OP.GG & U.GG Quick Access Pengu Loader Plugin
 
 ## What it does
 
