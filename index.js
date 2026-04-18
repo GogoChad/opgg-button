@@ -88,10 +88,10 @@ async function fetchRank(puuid) {
     }
 }
 
-// ========== FONCTION CORRIGÉE ==========
+// ========== PUUID ==========
 function getViewedPuuid() {
-    // Chercher UNIQUEMENT un profil avec is-searched="true"
-    // Ignore PARTIES-V2-ELEMENT et autres éléments avec [puuid]
+    // Search for elements with is-searched="true" only 
+    // Ignore PARTIES-V2-ELEMENT and other elements with [puuid]
     const elements = document.querySelectorAll('lol-regalia-profile-v2-element[puuid]');
     for (const el of elements) {
         if (el.getAttribute('is-searched') === 'true') {
@@ -290,7 +290,7 @@ function createUggButton(gameName, tagLine, rank) {
         width: '60px',
         height: '60px',
         borderRadius: '50%',
-        background: '#000000', // fond noir pour U.GG (meilleur contraste avec son logo)
+        background: '#000000',
         border: `3px solid ${tierColor}`,
         boxShadow: `0 0 25px ${tierColor}66, inset 0 0 10px ${tierColor}33`,
         cursor: 'pointer',
@@ -306,8 +306,8 @@ function createUggButton(gameName, tagLine, rank) {
     Object.assign(img.style, {
         width: '100%',
         height: '100%',
-        objectFit: 'cover', // remplit tout le cercle
-        borderRadius: '50%', // au cas où
+        objectFit: 'cover',
+        borderRadius: '50%', 
         userSelect: 'none',
         pointerEvents: 'none'
     });
@@ -341,7 +341,7 @@ function createUggButton(gameName, tagLine, rank) {
 async function inject() {
     const puuid = getViewedPuuid();
 
-    // Aucun profil visible — retirer les boutons
+    // No profile or profile without puuid, remove buttons if they exist
     if (!puuid) {
         if (lastPuuid !== null || document.getElementById('opgg-btn')) {
             removeButtons();
@@ -419,7 +419,7 @@ window.addEventListener('load', async () => {
         attributeFilter: ['puuid', 'is-searched']
     });
 
-    // DEBUG : exposer les variables pour la console
+    // DEBUG : 
     window.__opgg = {
         get lastPuuid() { return lastPuuid; },
         tagCache,
